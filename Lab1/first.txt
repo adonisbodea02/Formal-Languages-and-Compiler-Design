@@ -1,0 +1,22 @@
+int main(){
+int a[10];
+int b;
+char b[12] = 'abc';
+a = 1;
+b = 2;
+(a+bra&&ca/2<=+a>=b||2)
+scanf(a);
+scanf(b);
+if(a < b){
+    printf(a)
+}
+else{
+    printf(b)
+}
+while(bra+ca='ado')
+{
+bra = ca
+}
+
+return 0;
+}
