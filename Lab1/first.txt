@@ -1,9 +1,9 @@
 int main(){
-int a[10];
-int b;
-char b[12] = 'abc';
-a = 1;
-b = 2;
+int b[10];
+int a;
+char b[12] = 'A';
+a = 0;
+b =-'a';
 (a+bra&&ca/2<=+a>=b||2)
 scanf(a);
 scanf(b);
@@ -13,7 +13,7 @@ if(a < b){
 else{
     printf(b)
 }
-while(bra+ca='ado')
+while(bra - ca='9')
 {
 bra = ca
 }

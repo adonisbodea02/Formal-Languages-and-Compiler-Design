@@ -28,7 +28,7 @@ class BinarySearchTree:
                 while len(self.nodes) < position:
                     self.nodes.append(None)
                 self.nodes[len(self.nodes)-1] = value
-            return position - 1
+            return position
 
     def find(self, value):
         if len(self.nodes) == 0:
@@ -39,7 +39,7 @@ class BinarySearchTree:
                 if self.nodes[position-1] is None:
                     return None
                 if value == self.nodes[position-1]:
-                    return position - 1
+                    return position
                 if value < self.nodes[position-1]:
                     position *= 2
                 else:

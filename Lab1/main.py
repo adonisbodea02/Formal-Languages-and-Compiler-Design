@@ -1,5 +1,5 @@
 from ProgramInternalForm import ProgramInternalForm
-from Scanner import token_generator, is_identifier, is_constant
+from Scanner import token_generator, is_identifier, is_constant, is_numeric_constant
 from SymbolTable import SymbolTable
 from Utils import *
 
@@ -17,21 +17,39 @@ if __name__ == '__main__':
     counter = 0
     for line in lines:
         counter += 1
-        for token in token_generator(line[0:-1], separators):
-            if token in everything:
-                pif.add(codification[token], -1)
-            elif is_identifier(token):
-                pos = symbolTableIdentifiers.find(token)
+        tokens = token_generator(line[0:-1], separators)
+        i = 0
+        while i in range(len(tokens)):
+            if tokens[i] in everything:
+                if tokens[i] != ' ' and tokens[i] != '-':
+                    pif.add(codification[tokens[i]], -1)
+                    i += 1
+                elif tokens[i] == '-' and is_numeric_constant(tokens[i+1]) and tokens[i-1] in everything:
+                    pos = symbolTableConstants.find(tokens[i]+tokens[i+1])
+                    if pos is None:
+                        pos = symbolTableConstants.insert(tokens[i]+tokens[i+1])
+                    pif.add(codification['constant'], pos)
+                    i += 2
+                elif tokens[i] == ' ':
+                    i += 1
+                else:
+                    pif.add(codification[tokens[i]], -1)
+                    i += 1
+
+            elif is_identifier(tokens[i]):
+                pos = symbolTableIdentifiers.find(tokens[i])
                 if pos is None:
-                    pos = symbolTableIdentifiers.insert(token)
+                    pos = symbolTableIdentifiers.insert(tokens[i])
                 pif.add(codification['identifier'], pos)
-            elif is_constant(token):
-                pos = symbolTableConstants.find(token)
+                i += 1
+            elif is_constant(tokens[i]):
+                pos = symbolTableConstants.find(tokens[i])
                 if pos is None:
-                    pos = symbolTableConstants.insert(token)
+                    pos = symbolTableConstants.insert(tokens[i])
                 pif.add(codification['constant'], pos)
+                i += 1
             else:
-                raise Exception('Unknown token ' + token + ' at line ' + str(counter))
+                raise Exception('Unknown token ' + tokens[i] + ' at line ' + str(counter))
 
     print(pif)
     print(symbolTableIdentifiers)

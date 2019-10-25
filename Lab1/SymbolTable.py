@@ -15,5 +15,5 @@ class SymbolTable:
         s = 'Symbol Table:\n'
         for i in range(len(self.__binarySearchTree.nodes)):
             if self.__binarySearchTree.nodes[i] is not None:
-                s += str(i) + ' ' + self.__binarySearchTree.nodes[i] + '\n'
+                s += str(i+1) + ' ' + self.__binarySearchTree.nodes[i] + '\n'
         return s

@@ -7,7 +7,11 @@ def is_identifier(token):
 
 
 def is_constant(token):
-    return re.match('^(0|-?[1-9][0-9]*)$|^\'[a-zA-Z0-9]*\'$', token) is not None
+    return re.match('^(0|-?[1-9][0-9]*)$|^\'[a-zA-Z0-9]\'$', token) is not None
+
+
+def is_numeric_constant(token):
+    return re.match('^[1-9][0-9]*$', token) is not None
 
 
 def is_part_of_operator(char):
@@ -43,27 +47,28 @@ def get_string_token(line, index):
 def token_generator(line, list_of_separators):
     token = ""
     index = 0
+    tokens = []
 
     while index < len(line):
         if line[index] == "'":
             if token:
-                yield token
+                tokens.append(token)
             token, index = get_string_token(line, index)
-            yield token
+            tokens.append(token)
             token = ''
 
         elif is_part_of_operator(line[index]):
             if token:
-                yield token
+                tokens.append(token)
             token, index = get_operator_token(line, index)
-            yield token
+            tokens.append(token)
             token = ''
 
         elif line[index] in list_of_separators:
             if token:
-                yield token
+                tokens.append(token)
             token, index = line[index], index + 1
-            yield token
+            tokens.append(token)
             token = ''
 
         else:
@@ -71,7 +76,9 @@ def token_generator(line, list_of_separators):
             index += 1
 
     if token:
-        yield token
+        tokens.append(token)
+
+    return tokens
 
 
 # print([token for token in token_generator('(a+bra&&ca/2<=+a>=b||2)', separators)])
