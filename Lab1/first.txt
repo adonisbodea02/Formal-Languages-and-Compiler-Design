@@ -3,7 +3,7 @@ int b[10];
 int a;
 char b[12] = 'A';
 a = 0;
-b =-'a';
+b =-4;
 (a+bra&&ca/2<=+a>=b||2)
 scanf(a);
 scanf(b);
