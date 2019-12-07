@@ -115,14 +115,16 @@ class FiniteAutomaton:
         for production in rg.P:
             state2 = 'K'
             state1, rhs = production
-            if state1 == q0 and rhs[0] == 'e':
-                F.append(q0)
+            if state1 == q0[0] and rhs[0] == 'e':
+                F.append(q0[0])
                 state2 = q0
 
             symbol = rhs[0]
 
             if len(rhs) == 2:
                 state2 = rhs[1]
+                if rhs[1] == q0[0] and rhs[1] not in F:
+                    F.append(q0[0])
 
             delta.append(((state1, symbol), state2))
 

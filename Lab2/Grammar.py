@@ -92,7 +92,8 @@ class Grammar:
                 return False
             for char in rhs:
                 if self.is_non_terminal(char):
-                    used_in_rhs[char] = True
+                    if not (lhs == self.S and char == self.S):
+                        used_in_rhs[char] = True
                     has_non_terminal = True
                 elif self.is_terminal(char):
                     if has_non_terminal:

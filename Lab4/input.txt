@@ -1,0 +1,28 @@
+N ={program,entry,end,stmtlist,stmt,assignstmt,ifstmt,iostmt,whilestmt,declstmt,varlist,var,outIden,expr,factor,term,readstmt,writestmt,out,condition,relation,expr',term'}
+E={0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,e}
+S=program
+P = {
+	program -> entry 15 stmtlist end 16,
+    entry -> 2 4 11 12,
+    end -> 30 1 17,
+    stmtlist -> stmt stmtlist | e,
+    stmt -> ifstmt | assignstmt | declstmt | iostmt | whilestmt,
+    declstmt -> 2 varlist 17 | 3 varlist 17,
+    varlist -> var | var 31 varlist,
+    var -> 0 | 0 13 1 14,
+    assignstmt -> outIden 22 expr 17,
+    expr -> term expr',
+    expr' -> 18 term expr' | 19 term expr' | e,
+    term -> factor term',
+    term' -> 20 factor term' | 21 factor term' | e,
+    factor -> 11 expr 12 | 0 | 1,
+    outIden -> var | 0 13 0 14,
+    iostmt -> readstmt | writestmt,
+    readstmt -> 9 29 0 17,
+    writestmt -> 10 28 out 17,
+    out -> outIden | 1,
+    ifstmt -> 6 11 condition 12 15 stmtlist 16 7 15 stmtlist 16,
+    whilestmt -> 8 11 condition 12 15 stmtlist 16,
+    condition -> expr relation expr,
+    relation -> 24 | 25 | 26 | 27 | 23,
+}

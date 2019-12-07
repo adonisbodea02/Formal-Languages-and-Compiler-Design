@@ -1,0 +1,26 @@
+N={
+program, statement_list, statement, declaration, type, simple_statement,
+assignment, expression, operation, term, out_statement, in_statement,
+complicated_statement, condition, while_statement
+}
+E={0..33, epsilon}
+P={
+program -> 3 9 30 31 28 statement_list 10 1 32 29
+statement_list -> statement | statement statement_list
+statement -> declaration | simple_statement | complicated_statement | epsilon
+declaration -> type 0 32 | type 0 26 1 27 32
+type -> 2 | 3
+simple_statement -> assignment | out_statement | in_statement
+assignment -> 0 18 expression 32 | 0 26 1 27 18 expression 32
+expression -> term | 24 term | expression operation expression | 24 expression operation expression | 30 expression operation expression 31 | 24 30 expression operation expression 31
+operation -> 11 | 12 | 13 | 14 | 15
+term -> 0 | 1
+out_statement -> 6 30 term 31 28 statement_list 29
+in_statement -> 7 30 0 31
+complicated_statement -> if_statement | while_statement
+if_statement -> 4 30 condition 31 28 statement_list 29 | 4 30 condition 31 28 statement_list 29 5 28 statement_list 29
+condition -> expression relation expression 
+relation -> 16 | 17 | 19 | 20 | 21 | 22 | 23 | 25
+while_statement = 8 30 condition 31 28 statement_list 29
+}
+S=program
