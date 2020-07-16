@@ -1,0 +1,11 @@
+#define IDENTIFIER 1
+#define CONSTANT 2
+#define CHAR 3
+#define INT 4
+#define IF 5
+#define ELSE 6
+#define PRINTF 7
+#define SCANF 8
+#define WHILE 9
+#define MAIN 10
+#define RETURN 11
