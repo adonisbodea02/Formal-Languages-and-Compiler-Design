@@ -1,21 +1,20 @@
-int main(){
-int b[10];
-int a;
-char b[12] = 'A';
+INT MAIN(){
+INT b[10];
+INT a;
 a = 0;
-b =-4;
-scanf(a);
-scanf(b);
-if(a < b){
-    printf(a)
+SCANF(a);
+SCANF(b);
+IF(a < b){
+    PRINTF(a);
 }
-else{
-    printf(b)
+ELSE{
+    PRINTF(b);
 }
-while(a == 9)
+WHILE(a == '9')
 {
-b = 2;
+b = !-2;
+a = 'A';
 }
 
-return 0;
+RETURN 0
 }

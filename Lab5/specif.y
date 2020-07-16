@@ -1,6 +1,7 @@
 %{
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #define YYDEBUG 1
 %}
@@ -44,23 +45,23 @@
 
 %%
 
-program = INT MAIN LEFT_ROUND_PARENTHESIS RIGHT_ROUND_PARENTHESIS LEFT_ACCOLADE statement_list RETURN CONSTANT SEMI_COLON RIGHT_ACCOLADE ;
-statement_list = statement statement_list | statement ;
-statement = declaration | simple_statement | complicated_statement ;
-declaration = type identifier SEMI_COLON | type identifier LEFT_SQUARE_PARANTHESIS CONSTANT RIGHT_SQUARE_PARENTHESIS SEMI_COLON ; 
-type = INT | CHAR ;
-simple_statement = assignment | out_statement | in_statement ;
-assignment = IDENTIFIER ASSIGNMENT expression SEMI_COLON | IDENTIFIER LEFT_SQUARE_PARENTHESIS CONSTANT RIGHT_SQUARE_PARENTHESIS ASSIGNMENT expression SEMI_COLON ;
-expression = term | NOT term | expression operation expression | NOT expression operation expression | LEFT_ROUND_PARENTHESIS expression operation expression RIGHT_ROUND_PARENTHESIS | NOT LEFT_ROUND_PARENTHESIS expression operation expression RIGHT_ROUND_PARENTHESIS ;
-operation = PLUS | MINUS | MULTIPLY | DIVISION | MOD ;
-term = IDENTIFIER | CONSTANT ;
-out_statement = PRINTF LEFT_ROUND_PARANTHESIS term RIGHT_ROUND_PARANTHESIS SEMI_COLON ;
-in_statement = SCANF LEFT_ROUND_PARANTHESIS IDENTIFIER RIGHT_ROUND_PARANTHESIS SEMI_COLON
-complicated_statement = if_statement | while_statement
-if_statement -> IF LEFT_ROUND_PARANTHESIS condition RIGHT_ROUND_PARANTHESIS LEFT_ACCOLADE statement_list RIGHT_ACCOLADE | IF LEFT_ROUND_PARANTHESIS condition RIGHT_ROUND_PARANTHESIS LEFT_ACCOLADE statement_list RIGHT_ACCOLADE ELSE LEFT_ACCOLADE statement_list RIGHT_ACCOLADE
-condition = expression relation expression
-while_statement = WHILE LEFT_ROUND_PARANTHESIS condition RIGHT_ROUND_PARANTHESIS LEFT_ACCOLADE statement_list RIGHT_ACCOLADE
-relation = LESS | LESS_OR_EQUAL_THAN | EQUAL | NOT_EQUAL | GREATER_OR_EQUAL_THAN | GREATER | AND | OR
+program : INT MAIN LEFT_ROUND_PARENTHESIS RIGHT_ROUND_PARENTHESIS LEFT_ACCOLADE statement_list RETURN CONSTANT SEMI_COLON RIGHT_ACCOLADE ;
+statement_list : statement statement_list | statement ;
+statement : declaration | simple_statement | complicated_statement ;
+declaration : type IDENTIFIER SEMI_COLON | type IDENTIFIER LEFT_SQUARE_PARENTHESIS CONSTANT RIGHT_SQUARE_PARENTHESIS SEMI_COLON ; 
+type : INT | CHAR ;
+simple_statement : assignment | out_statement | in_statement ;
+assignment : IDENTIFIER ASSIGNMENT expression SEMI_COLON | IDENTIFIER LEFT_SQUARE_PARENTHESIS CONSTANT RIGHT_SQUARE_PARENTHESIS ASSIGNMENT expression SEMI_COLON ;
+expression : term | NOT term | expression operation expression | NOT expression operation expression | LEFT_ROUND_PARENTHESIS expression operation expression RIGHT_ROUND_PARENTHESIS | NOT LEFT_ROUND_PARENTHESIS expression operation expression RIGHT_ROUND_PARENTHESIS ;
+operation : PLUS | MINUS | MULTIPLY | DIVISION | MOD ;
+term : IDENTIFIER | CONSTANT ;
+out_statement : PRINTF LEFT_ROUND_PARENTHESIS term RIGHT_ROUND_PARENTHESIS SEMI_COLON ;
+in_statement : SCANF LEFT_ROUND_PARENTHESIS IDENTIFIER RIGHT_ROUND_PARENTHESIS SEMI_COLON
+complicated_statement : if_statement | while_statement
+if_statement : IF LEFT_ROUND_PARENTHESIS condition RIGHT_ROUND_PARENTHESIS LEFT_ACCOLADE statement_list RIGHT_ACCOLADE | IF LEFT_ROUND_PARENTHESIS condition RIGHT_ROUND_PARENTHESIS LEFT_ACCOLADE statement_list RIGHT_ACCOLADE ELSE LEFT_ACCOLADE statement_list RIGHT_ACCOLADE
+condition : expression relation expression
+while_statement : WHILE LEFT_ROUND_PARENTHESIS condition RIGHT_ROUND_PARENTHESIS LEFT_ACCOLADE statement_list RIGHT_ACCOLADE
+relation : LESS_THAN | LESS_OR_EQUAL_THAN | EQUAL | NOT_EQUAL | GREATER_OR_EQUAL_THAN | GREATER_THAN | AND | OR
 
 %%
 
